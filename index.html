@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Практические работы по JavaScript</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="container">
+      <p class="eyebrow">ПРОГРАММИРОВАНИЕ · JAVASCRIPT</p>
+      <h1>Практические работы</h1>
+      <p class="subtitle">Формы, выпадающие списки и таймеры</p>
+      <div class="chips"><span>10 практических</span><span>Итоговый проект</span><span>HTML · CSS · JS</span></div>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <aside class="sidebar">
+      <h3>Содержание</h3>
+      <button class="nav-btn active" data-target="p1">01 · Регистрация студента</button>
+      <button class="nav-btn" data-target="p2">02 · Калькулятор заказа</button>
+      <button class="nav-btn" data-target="p3">03 · Надёжность пароля</button>
+      <button class="nav-btn" data-target="p4">04 · Выбор курса</button>
+      <button class="nav-btn" data-target="p5">05 · Учебные группы</button>
+      <button class="nav-btn" data-target="p6">06 · Каталог товаров</button>
+      <button class="nav-btn" data-target="p7">07 · Секундомер</button>
+      <button class="nav-btn" data-target="p8">08 · Обратный отсчёт</button>
+      <button class="nav-btn" data-target="p9">09 · Слайдер</button>
+      <button class="nav-btn" data-target="p10">10 · Тест JavaScript</button>
+      <button class="nav-btn final-nav" data-target="final">★ Итоговый проект</button>
+    </aside>
+
+    <section class="content">
+      <section class="panel active" id="p1">
+        <div class="section-head"><span class="number">01</span><div><h2>Регистрация студента</h2><p>Заполните данные и отправьте форму.</p></div></div>
+        <form id="studentForm" class="form-grid">
+          <label>ФИО<input id="studentName" placeholder="Например, Иванов Иван" required></label>
+          <label>Email<input id="studentEmail" type="email" placeholder="name@example.com" required></label>
+          <label>Возраст<input id="studentAge" type="number" min="14" max="100" placeholder="18" required></label>
+          <label>Учебная группа<input id="studentGroup" placeholder="РПО-25-2" required></label>
+          <label>Телефон<input id="studentPhone" type="tel" placeholder="+7 700 123 45 67" required></label>
+          <button class="primary full" type="submit">Зарегистрировать</button>
+        </form>
+        <p id="studentResult" class="result" aria-live="polite"></p>
+      </section>
+
+      <section class="panel" id="p2">
+        <div class="section-head"><span class="number">02</span><div><h2>Калькулятор стоимости заказа</h2><p>Рассчитайте стоимость с учётом скидки 10% от 50 000 ₸.</p></div></div>
+        <div class="form-grid">
+          <label>Цена одного товара (₸)<input id="price" type="number" min="0" value="12000"></label>
+          <label>Количество<input id="quantity" type="number" min="1" value="5"></label>
+          <button class="primary full" id="calculateBtn">Рассчитать</button>
+        </div>
+        <div id="totalResult" class="result"></div>
+      </section>
+
+      <section class="panel" id="p3">
+        <div class="section-head"><span class="number">03</span><div><h2>Проверка сложности пароля</h2><p>Пароль проверяется автоматически во время ввода.</p></div></div>
+        <label>Пароль<div class="password-row"><input id="password" type="password" placeholder="Введите пароль"><button class="secondary" id="togglePassword" type="button">Показать</button></div></label>
+        <div class="meter"><div id="passwordMeter"></div></div>
+        <p id="passwordStrength" class="result">Введите пароль для проверки.</p>
+        <ul class="checks"><li id="ruleLength">Не менее 8 символов</li><li id="ruleLetters">Есть буквы и цифры</li><li id="ruleSpecial">Есть специальный символ</li></ul>
+      </section>
+
+      <section class="panel" id="p4">
+        <div class="section-head"><span class="number">04</span><div><h2>Выбор учебного курса</h2><p>Выберите дисциплину, чтобы узнать длительность и стоимость.</p></div></div>
+        <label>Учебная дисциплина<select id="course"><option value="">Выберите дисциплину</option><option value="js">JavaScript</option><option value="python">Python</option><option value="html">HTML и CSS</option><option value="node">Node.js</option></select></label>
+        <div id="courseInfo" class="result"></div>
+        <button id="enrollCourse" class="primary" disabled>Записаться на курс</button>
+        <p id="courseMessage" class="muted"></p>
+      </section>
+
+      <section class="panel" id="p5">
+        <div class="section-head"><span class="number">05</span><div><h2>Зависимые выпадающие списки</h2><p>Список групп и студентов зависит от выбранной специальности.</p></div></div>
+        <div class="form-grid">
+          <label>Специальность<select id="specialty"><option value="">Выберите специальность</option><option value="software">Программное обеспечение</option><option value="design">Дизайн</option><option value="network">Сетевые технологии</option></select></label>
+          <label>Учебная группа<select id="groupSelect" disabled><option value="">Сначала выберите специальность</option></select></label>
+          <label class="full">Студент<select id="studentSelect" disabled><option value="">Сначала выберите группу</option></select></label>
+        </div>
+        <div id="groupInfo" class="result"></div>
+      </section>
+
+      <section class="panel" id="p6">
+        <div class="section-head"><span class="number">06</span><div><h2>Фильтрация товаров</h2><p>15 товаров, фильтр по категории и сортировка по цене.</p></div></div>
+        <div class="toolbar">
+          <label>Категория<select id="category"><option value="all">Все товары</option><option value="Ноутбуки">Ноутбуки</option><option value="Телефоны">Телефоны</option><option value="Планшеты">Планшеты</option></select></label>
+          <label>Сортировка<select id="sortPrice"><option value="asc">Сначала дешевле</option><option value="desc">Сначала дороже</option></select></label>
+          <label>Цена<select id="priceRange"><option value="all">Любая цена</option><option value="low">До 100 000 ₸</option><option value="mid">100 000–300 000 ₸</option><option value="high">От 300 000 ₸</option></select></label>
+        </div>
+        <div id="productList" class="product-grid"></div>
+      </section>
+
+      <section class="panel" id="p7">
+        <div class="section-head"><span class="number">07</span><div><h2>Секундомер</h2><p>Запуск, остановка и сброс времени в формате MM:SS.</p></div></div>
+        <div class="timer-display" id="stopwatchDisplay">00:00</div>
+        <div class="actions center"><button class="primary" id="watchStart">Старт</button><button class="secondary" id="watchStop">Стоп</button><button class="ghost" id="watchReset">Сброс</button></div>
+      </section>
+
+      <section class="panel" id="p8">
+        <div class="section-head"><span class="number">08</span><div><h2>Таймер обратного отсчёта</h2><p>Выберите длительность, запустите или поставьте таймер на паузу.</p></div></div>
+        <label>Длительность<select id="countdownDuration"><option value="60">1 минута</option><option value="120">2 минуты</option><option value="300">5 минут</option><option value="600">10 минут</option></select></label>
+        <div class="timer-display" id="countdownDisplay">01:00</div>
+        <div class="actions center"><button class="primary" id="countStart">Старт</button><button class="secondary" id="countPause">Пауза</button><button class="ghost" id="countReset">Сброс</button></div>
+        <p id="countdownMessage" class="result"></p>
+      </section>
+
+      <section class="panel" id="p9">
+        <div class="section-head"><span class="number">09</span><div><h2>Автоматическое переключение слайдов</h2><p>Слайды меняются каждые 3 секунды. Можно переключать вручную.</p></div></div>
+        <div class="slider">
+          <div id="slideVisual" class="slide-visual"><span>01</span><strong>JavaScript</strong><small>Создавайте интерактивные сайты</small></div>
+          <div class="slider-controls"><button class="secondary" id="prevSlide">← Назад</button><span id="slideCounter">1 / 5</span><button class="secondary" id="nextSlide">Вперёд →</button></div>
+        </div>
+        <div class="actions center"><button class="primary" id="sliderToggle">Остановить автопрокрутку</button></div>
+      </section>
+
+      <section class="panel" id="p10">
+        <div class="section-head"><span class="number">10</span><div><h2>Тестирование по JavaScript</h2><p>10 вопросов. На прохождение даётся 5 минут. Результат сохраняется в браузере.</p></div></div>
+        <div id="quizArea">
+          <div class="quiz-meta"><span id="questionCounter">Вопрос 1 из 10</span><strong id="quizTimer">05:00</strong></div>
+          <div class="progress"><div id="quizProgress"></div></div>
+          <h3 id="questionText"></h3>
+          <div id="answers" class="answer-list"></div>
+          <div class="actions"><button class="secondary" id="quizPrev" disabled>Назад</button><button class="primary" id="quizNext">Далее</button></div>
+        </div>
+        <div id="quizResult" class="result hidden"></div>
+        <button id="quizRestart" class="primary hidden">Пройти ещё раз</button>
+        <p id="lastQuizScore" class="muted"></p>
+      </section>
+
+      <section class="panel" id="final">
+        <div class="section-head"><span class="number star">★</span><div><h2>Онлайн-запись на консультацию</h2><p>Итоговый проект: форма, списки, проверка доступности и таймер подтверждения.</p></div></div>
+        <form id="bookingForm" class="form-grid">
+          <label>ФИО студента<input id="bookingName" required placeholder="Ваше имя"></label>
+          <label>Email<input id="bookingEmail" type="email" required placeholder="name@example.com"></label>
+          <label>Учебная группа<input id="bookingGroup" required placeholder="РПО-25-2"></label>
+          <label>Преподаватель<select id="teacher" required><option value="">Выберите преподавателя</option></select></label>
+          <label>Дата консультации<input id="bookingDate" type="date" required></label>
+          <label>Время<select id="timeSlot" required disabled><option value="">Сначала выберите преподавателя и дату</option></select></label>
+          <label class="full">Тема консультации<textarea id="bookingTopic" rows="3" required placeholder="Кратко опишите вопрос"></textarea></label>
+          <button class="primary full" type="submit">Подтвердить запись</button>
+        </form>
+        <div id="bookingStatus" class="result"></div>
+        <div id="confirmationBox" class="confirmation hidden">
+          <p class="muted">Время на подтверждение учебной заявки</p>
+          <div class="timer-display compact" id="confirmationTimer">02:00</div>
+          <button id="cancelBooking" class="danger">Отменить запись</button>
+        </div>
+        <h3 class="subheading">Мои заявки</h3>
+        <div id="bookingList" class="booking-list"><p class="muted">Пока заявок нет.</p></div>
+      </section>
+      <footer>Учебный проект · JavaScript · Все данные демонстрационные</footer>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
